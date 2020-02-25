@@ -17,9 +17,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
 android {
     compileSdkVersion 29
-
 
     defaultConfig {
         applicationId "com.sky.tv.movie"
@@ -29,17 +29,68 @@ android {
         versionName "1.0"
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        sky {
+            storeFile file("${rootDir}/keyStore/sky.jks")
+            storePassword project.storePassword
+            keyAlias project.keyAlias
+            keyPassword project.keyPassword
         }
     }
 
+    buildTypes {
+        release {
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "${project.name}_${variant.flavorName}_v${variant.versionName}.apk"
+                }
+            }
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.sky
+        }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.sky
+        }
+    }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        all { flavor ->
+            resValue 'string', 'flavor', flavor.name
+        }
+        tv {
+            dimension "default"
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.leanback:leanback:1.0.0'
+    implementation 'androidx.leanback:leanback-preference:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation "androidx.core:core-ktx:1.2.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.github.sky-wei:android-common:1.1.1'
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    implementation 'me.jessyan:autosize:1.1.2'
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.12'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.uber.autodispose:autodispose:1.4.0'
+    implementation 'com.uber.autodispose:autodispose-android:1.4.0'
+    implementation 'com.uber.autodispose:autodispose-android-archcomponents:1.4.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
 }

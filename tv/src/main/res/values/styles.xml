@@ -17,5 +17,27 @@
 
 <resources>
 
-    <style name="AppTheme" parent="@style/Theme.Leanback" />
+    <style name="Theme.App.Leanback" parent="@style/Theme.Leanback" >
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14</item>
+    </style>
+
+    <style name="Theme.Start.Leanback" parent="Theme.App.Leanback" >
+        <item name="android:windowBackground">@color/default_background</item>
+    </style>
+
+    <style name="Theme.App.LeanbackBrowse" parent="Theme.Leanback.Browse">
+        <item name="android:windowBackground">@color/default_background</item>
+        <item name="defaultBrandColor">@color/fastlane_background</item>
+        <item name="defaultSearchColor">@color/search_color</item>
+        <item name="defaultSearchIconColor">@color/search_icon_color</item>
+        <item name="defaultSearchBrightColor">@color/search_bright_color</item>
+    </style>
+
+    <style name="Theme.App.Leanback.Home" parent="Theme.App.LeanbackBrowse">
+<!--        <item name="browseTitleViewLayout">@layout/title_view</item>-->
+        <item name="browseRowsMarginTop">120dp</item>
+    </style>
+
 </resources>
