@@ -16,11 +16,24 @@
 
 package com.sky.tv.movie.data.source
 
+import com.sky.tv.movie.data.model.MovieModel
+import com.sky.tv.movie.data.model.SearchParam
+import io.reactivex.Observable
+
 /**
  * Created by sky on 2020-02-25.
  */
 interface IMovieSource {
 
 
+    /**
+     * 搜索分类
+     */
+    fun newSearchSubjects(param: SearchParam): Observable<List<MovieModel>>
 
+
+    /**
+     * 搜索分类
+     */
+    fun searchSubjects(param: SearchParam): Observable<List<MovieModel>>
 }

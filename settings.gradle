@@ -15,4 +15,4 @@
  */
 
 include ':app', ':tv'
-rootProject.name='Movie'
+rootProject.name='android-movie'

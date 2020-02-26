@@ -56,7 +56,6 @@ android {
         }
         debug {
             minifyEnabled false
-            signingConfig signingConfigs.sky
         }
     }
 
@@ -92,5 +91,6 @@ dependencies {
     implementation 'com.uber.autodispose:autodispose:1.4.0'
     implementation 'com.uber.autodispose:autodispose-android:1.4.0'
     implementation 'com.uber.autodispose:autodispose-android-archcomponents:1.4.0'
+    implementation 'com.jakewharton:disklrucache:2.0.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
 }

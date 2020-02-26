@@ -21,5 +21,5 @@ package com.sky.tv.movie
  */
 object Constant {
 
-
+    const val BASE_URL = "https://coding.net/u/sky_wei/p/xposed-rimet/git/raw/develop/"
 }
